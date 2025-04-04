@@ -11,7 +11,7 @@
 
 ## 📁 Files
 
-- `Prwto_paradoteo.pdf`: First project deliverable containing system overview, use cases, and requirements.
+- `Prwto_paradoteo.pdf`: First project deliverable containing system overview, use case and domain model.
 
 ## 👨‍💻 Developed for
 
