@@ -1,6 +1,6 @@
-# Build-it
+# BUILD IT
 
-**Build-it** is a platform that connects **individuals** seeking project implementation with **construction companies** and **workshops**.
+**BUILD IT** is a platform that connects **individuals** seeking project implementation with **construction companies** and **workshops**.
 
 ## 🔧 Features
 **Individuals**: Create and publish projects, evaluate construction companies, delete projects if they want to.
@@ -11,7 +11,7 @@
 
 ## 📁 Files
 
-- `Prwto_paradoteo.pdf`: First project deliverable containing system overview, use case and domain model.
+- `1st Integrated Deliverable.pdf`: First project deliverable containing system overview, use case and domain model.
 
 ## 👨‍💻 Developed for
 
