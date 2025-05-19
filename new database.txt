@@ -1,0 +1,164 @@
+CREATE DATABASE IF NOT EXISTS databases_project;
+USE databases_project;
+
+CREATE TABLE User (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100),
+    phone_number VARCHAR(20),
+    address TEXT
+);
+
+CREATE TABLE Citizen (
+    user_id INT PRIMARY KEY REFERENCES User(id)
+);
+
+CREATE TABLE Construction (
+    user_id INT PRIMARY KEY REFERENCES User(id),
+    description TEXT,
+    location VARCHAR(100),
+    available BOOLEAN
+);
+
+CREATE TABLE Workshop (
+    user_id INT PRIMARY KEY REFERENCES User(id),
+    workshop_type VARCHAR(50),
+    description TEXT,
+    location VARCHAR(100),
+    available BOOLEAN
+);
+
+CREATE TABLE Project (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    information TEXT,
+    construction_type VARCHAR(50),
+    start_date DATE,
+    location VARCHAR(100),
+    status VARCHAR(20) CHECK (status IN ('Pending', 'Active', 'Completed')),
+    citizen_id INT REFERENCES Citizen(user_id),
+    construction_id INT REFERENCES Construction(user_id),
+    workshop_id INT REFERENCES Workshop(user_id)
+);
+
+CREATE TABLE License (
+    id SERIAL PRIMARY KEY,
+    project_id INT REFERENCES Project(id),
+    license_type VARCHAR(50),
+    license_description TEXT,
+    start_date DATE
+);
+
+CREATE TABLE Issue (
+    id SERIAL PRIMARY KEY,
+    project_id INT REFERENCES Project(id),
+    construction_id INT REFERENCES Construction(user_id),
+    issue_type VARCHAR(50),
+    issue_description TEXT,
+    new_finish_date DATE
+);
+
+CREATE TABLE Review (
+    id SERIAL PRIMARY KEY,
+    reviewer_id INT REFERENCES User(id),
+    reviewee_id INT REFERENCES User(id),
+    project_id INT REFERENCES Project(id),
+    stars INT CHECK (stars BETWEEN 1 AND 5),
+    date DATE,
+    comments TEXT
+);
+
+CREATE TABLE Request (
+    id SERIAL PRIMARY KEY,
+    construction_id INT REFERENCES Construction(user_id),
+    project_title VARCHAR(100),
+    email VARCHAR(100),
+    text TEXT
+);
+
+CREATE TABLE Appointment (
+    id SERIAL PRIMARY KEY,
+    construction_id INT REFERENCES Construction(user_id),
+    citizen_id INT REFERENCES Citizen(user_id),
+    estimated_cost DECIMAL(10, 2)
+);
+
+CREATE TABLE ProgressUpdate (
+    id SERIAL PRIMARY KEY,
+    workshop_id INT REFERENCES Workshop(user_id),
+    project_id INT REFERENCES Project(id),
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Notification (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES User(id),
+    type VARCHAR(50),
+    title VARCHAR(100),
+    date DATE
+);
+
+CREATE TABLE WorkshopRequest (
+    id SERIAL PRIMARY KEY,
+    construction_id INT REFERENCES Construction(user_id),
+    workshop_id INT REFERENCES Workshop(user_id),
+    project_id INT REFERENCES Project(id),
+    status VARCHAR(20) CHECK (status IN ('Pending', 'Accepted', 'Rejected')),
+    message TEXT
+);
+
+
+
+
+
+
+USE databases_project;
+
+INSERT INTO Citizen (user_id) VALUES
+(1),
+(2),
+(3);
+
+INSERT INTO Construction (user_id, description, location, available) VALUES
+(4, 'Boy receive care American.', 'Lake Albertmouth', TRUE),
+(5, 'Particular know bit others.', 'South Anthony', TRUE),
+(6, 'Share too public.', 'West Brianview', FALSE),
+(7, 'Indeed drive above.', 'Calvintown', TRUE);
+
+INSERT INTO Workshop (user_id, workshop_type, description, location, available) VALUES
+(8, 'Electricians', 'Social hour nothing point.', 'Justinborough', TRUE),
+(9, 'Plumbers', 'Near today artist.', 'North Scott', TRUE),
+(10, 'Painters', 'Study something third.', 'Port Janice', FALSE);
+
+INSERT INTO Project (name, information, construction_type, start_date, location, status, citizen_id, construction_id, workshop_id) VALUES
+('Dream House', 'Yard understand three page.', 'Construction', '2025-06-01', 'Lake Lauren', 'Pending', 1, 4, 8),
+('Office Reno', 'Look he space let possible exist Mrs.', 'Renovation', '2025-05-20', 'Karenburgh', 'Active', 2, 5, 9);
+
+INSERT INTO License (project_id, license_type, license_description, start_date) VALUES
+(1, 'Building', 'General permit for foundation', '2025-05-01'),
+(2, 'Renovation', 'Office internal redesign', '2025-05-10');
+
+INSERT INTO Issue (project_id, construction_id, issue_type, issue_description, new_finish_date) VALUES
+(1, 4, 'Καθυστέρηση', 'Supply chain delay', '2025-06-30'),
+(2, 5, 'Υλικά', 'Wrong material delivered', '2025-06-25');
+
+INSERT INTO Review (reviewer_id, reviewee_id, project_id, stars, comments, date) VALUES
+(1, 4, 1, 5, 'Excellent collaboration', '2025-05-15'),
+(2, 5, 1, 4, 'Very responsive', '2025-05-16'),
+(4, 8, 1, 5, 'Great quality work', '2025-05-17');
+
+SELECT * FROM Workshop;
+SELECT COUNT(*) FROM Workshop;
+
+-- Πρέπει να υπάρχουν τουλάχιστον:
+-- Ένας χρήστης (στον my_user)
+-- Ένα συνεργείο με αυτόν ως user_id στο Workshop
+
+INSERT INTO my_user (name, email, password) VALUES ('Ηλεκτρολόγος 1', 'hlek1@example.com', '1234');
+
+INSERT INTO Workshop (user_id, workshop_type, description, location, available)
+VALUES (1, 'Ηλεκτρολόγοι', 'Εξειδικευμένος ηλεκτρολόγος', 'Πάτρα', true);
+
+SELECT * FROM Workshop;
