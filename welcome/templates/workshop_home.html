@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Workshop Home – Build It</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar"></div>
+
+  <!-- Header -->
+  <div class="header-bar">
+    <div class="logo-left">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo-img">
+      <span class="welcome-text">Welcome!</span>
+    </div>
+    <div class="button-group">
+      <button class="nav-button">My Projects</button>
+      <button class="nav-button">Notifications</button>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="main-background">
+    <img src="{{ url_for('static', filename='images/workshop_center.png') }}" alt="Workshop Graphic" class="center-graphic">
+    <p class="motto-text">YOUR PROJECT, OUR PASSION</p>
+    <button class="settings-btn">
+      <img src="{{ url_for('static', filename='images/settings.png') }}" alt="Settings">
+    </button>
+  </div>
+
+</body>
+</html>

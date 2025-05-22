@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Citizen Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header-bar">
+        <div class="logo-left">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Build It Logo" class="logo-img">
+            <span class="welcome-text">Welcome!</span>
+        </div>
+        <div class="button-group">
+            <button class="nav-button">Upload Project</button>
+            <button class="nav-button">My Projects</button>
+            <button class="nav-button" onclick="window.location.href='/citizen/notifications'">Notifications</button>
+
+        </div>
+    </header>
+
+    <main class="main-background"></main>
+
+    <button class="settings-btn">
+        <img src="https://img.icons8.com/ios-filled/50/000000/settings.png" alt="Settings">
+    </button>
+</body>
+</html>
