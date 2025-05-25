@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Construction Co.</title>
+    <style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/static/images/image4.jpg'); /* εικόνα φόντου */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: rgb(106, 86, 64);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: rgba(116, 106, 59, 0.8);
+    padding: 10px 20px;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.welcome {
+    font-weight: bold;
+    margin-right: auto;
+}
+
+.navbar button {
+    margin: 0 5px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #9c9579;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.navbar button:hover {
+    background-color: #4d5d64;
+}
+
+.settings {
+    font-size: 18px;
+}
+
+.hero {
+    text-align: center;
+    margin-top: 120px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    text-shadow: 2px 2px 5px #000;
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='images/image3.png') }}" alt="Logo" class="logo">
+        <span class="welcome">Welcome!</span>
+        <a href="/search_form"><button>Search</button></a>
+        <a href="/Pending"><button>Pending Projects</button></a>
+        <a href="/my_projects"><button>My Projects</button></a>
+        <a href="/notifications"><button>Notifications</button></a>
+        <a href="/settings"><button class="settings">⚙</button></a>
+    </div>
+
+    <div class="hero">
+        <h1>BUILDING YOUR<br>FUTURE</h1>
+    </div>
+</body>
+</html>

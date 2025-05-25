@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>License Application</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('/static/images/image4.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #222;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .form-container button:hover {
+            background-color: #444;
+        }
+
+        .flash-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <form class="form-container" action="/license_application" method="POST">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-message">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <h2>License Application</h2>
+
+        <label for="project_id">Project ID</label>
+        <input type="number" name="project_id" id="project_id" required>
+
+        <label for="license_type">Type of License</label>
+        <select name="license_type" id="license_type" required>
+            <option value="">Select...</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Plumbing">Plumbing</option>
+            <option value="General Construction">General Construction</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="start_date">Start Date</label>
+        <input type="date" name="start_date" id="start_date" required>
+
+        <label for="description">Description</label>
+        <textarea name="description" id="description" rows="4" required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
