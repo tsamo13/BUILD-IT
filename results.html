@@ -1,0 +1,90 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Αποτελέσματα Αναζήτησης</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            background-image: url('/static/images/image4.jpg'); /* εικόνα φόντου */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .results-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2d3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #e3e9f1;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .choose-btn {
+            background-color: #3a7ca5;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .choose-btn:hover {
+            background-color: #2d3e50;
+        }
+
+        .no-results {
+            color: #7d7d7d;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="results-container">
+        <h1>Αποτελέσματα Αναζήτησης</h1>
+        {% if workshops %}
+            <ul>
+                {% for workshop in workshops %}
+                    <li>
+                        <strong>{{ workshop[1] }}</strong><br>
+                        <em>{{ workshop[2] }}</em><br>
+                        Τοποθεσία: {{ workshop[3] }}<br>
+                        <form action="/choose" method="POST" style="display:inline;">
+                            <input type="hidden" name="workshop_id" value="{{ workshop[0] }}">
+                            <button type="submit">Choose</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% elif workshops is not none %}
+            <p class="no-results">Δεν βρέθηκαν αποτελέσματα για την αναζήτησή σας.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

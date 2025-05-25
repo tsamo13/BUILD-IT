@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f4f4f4;
+            background-image: url('/static/images/image4.jpg'); /* εικόνα φόντου */
+            color: #333;
+        }
+        .profile {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            width: 400px;
+            margin: auto;
+        }
+        .profile h2 {
+            text-align: center;
+        }
+        .profile p {
+            margin: 10px 0;
+        }
+        .logout-button {
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #c0392b;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+        .logout-button:hover {
+            background-color: #a93226;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <h2>Account Settings</h2>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.phone_number }}</p>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </div>
+</body>
+</html>

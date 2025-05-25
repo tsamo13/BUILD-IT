@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pending Projects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/images/image4.jpg'); /* εικόνα φόντου */
+            background-color: #e8f0f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .project {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .project:last-child {
+            border-bottom: none;
+        }
+
+        .project h2 {
+            margin: 0;
+            color: #8f8a45;
+        }
+
+        .project p {
+            margin: 5px 0;
+            color: #444;
+        }
+
+        .form-inline {
+            margin-top: 10px;
+        }
+
+        .form-inline input[type="number"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 150px;
+            margin-right: 10px;
+        }
+
+        .form-inline button {
+            padding: 6px 15px;
+            background-color: #79862f;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-inline button:hover {
+            background-color: #8b962c;
+        }
+
+        .back-button {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .back-button a {
+            background-color: #79862f;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-button a:hover {
+            background-color: #8b962c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pending Projects</h1>
+
+        {% if Pending %}
+            {% for p in Pending %}
+                <div class="project">
+                    <h2>{{ p[0] }}</h2>
+                    <p><strong>Περιγραφή:</strong> {{ p[1] }}</p>
+                    <p><strong>Είδος Κατασκευής:</strong> {{ p[2] }}</p>
+                    <p><strong>Ημερομηνία Έναρξης:</strong> {{ p[3] }}</p>
+                    <p><strong>Τοποθεσία:</strong> {{ p[4] }}</p>
+
+                    <form class="form-inline" action="/submit_cost" method="POST">
+                        <input type="hidden" name="project_name" value="{{ p[0] }}">
+                        <label for="cost">Estimated Cost (χιλ. $):</label>
+                        <input type="number" name="estimated_cost" min="1" required>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Δεν υπάρχουν εκκρεμή έργα.</p>
+        {% endif %}
+
+        <div class="back-button">
+            <a href="/">⬅ Επιστροφή στην Αρχική</a>
+        </div>
+    </div>
+</body>
+</html>

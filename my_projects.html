@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Projects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f6fa;
+            background-image: url('/static/images/image4.jpg');
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #3d4b1b;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .project {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .project:last-child {
+            border-bottom: none;
+        }
+
+        .project p {
+            margin: 5px 0;
+        }
+
+        .license-button {
+            margin-top: 10px;
+        }
+
+        .license-button a {
+            display: inline-block;
+            background-color: #849434;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .license-button a:hover {
+            background-color: #6e8f27;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button a {
+            background-color: #7f9c35;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .back-button a:hover {
+            background-color: #557286;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔧 Ενεργά Έργα (Active)</h2>
+        {% if active_projects %}
+            {% for p in active_projects %}
+                <div class="project">
+                    <strong>{{ p[0] }}</strong>
+                    <p>{{ p[1] }}</p>
+                    <p>Ημερομηνία Έναρξης: {{ p[2] }}</p>
+                    <p>Τοποθεσία: {{ p[3] }}</p>
+                    <div class="license-button">
+                        <a href="/license_application"><button>license_application</button></a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Δεν υπάρχουν ενεργά έργα.</p>
+        {% endif %}
+
+        <h2>✅ Ολοκληρωμένα Έργα (Completed)</h2>
+        {% if completed_projects %}
+            {% for p in completed_projects %}
+                <div class="project">
+                    <strong>{{ p[0] }}</strong>
+                    <p>{{ p[1] }}</p>
+                    <p>Ημερομηνία Έναρξης: {{ p[2] }}</p>
+                    <p>Τοποθεσία: {{ p[3] }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Δεν υπάρχουν ολοκληρωμένα έργα.</p>
+        {% endif %}
+
+        <div class="back-button">
+            <a href="/">⬅ Αρχική</a>
+        </div>
+    </div>
+</body>
+</html>

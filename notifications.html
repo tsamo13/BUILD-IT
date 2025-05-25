@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress Updates & Notifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            background-image: url('/static/images/image4.jpg'); /* εικόνα φόντου */
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        .update-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .update-card h3 {
+            margin: 0 0 10px 0;
+        }
+        .update-card p {
+            margin: 5px 0;
+        }
+        .date {
+            color: #777;
+            font-size: 0.9em;
+        }
+        .notification-accepted {
+            border-left: 5px solid green;
+        }
+        .notification-rejected {
+            border-left: 5px solid red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Progress Updates & Notifications</h1>
+
+    {% if updates %}
+        {% for update in updates %}
+            <div class="update-card
+                {% if update.type == 'notification' %}
+                    {% if 'Accepted' in update.message %}
+                        notification-accepted
+                    {% elif 'Rejected' in update.message %}
+                        notification-rejected
+                    {% endif %}
+                {% endif %}
+            ">
+                {% if update.type == 'progress' %}
+                    <h3>Project: {{ update.project_name }}</h3>
+                    <p><strong>Workshop:</strong> {{ update.workshop_name }}</p>
+                    <p><strong>Message:</strong> {{ update.message }}</p>
+                    <p class="date">{{ update.created_at }}</p>
+                {% elif update.type == 'notification' %}
+                    <h3>Notification</h3>
+                    <p>{{ update.message }}</p>
+                    <p class="date">{{ update.created_at }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No updates available.</p>
+    {% endif %}
+</body>
+</html>
