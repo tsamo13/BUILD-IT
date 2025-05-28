@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <title>Notification Center</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="background">
+        <div class="container">
+            <h1>Notification Center</h1>
+
+            {% for note in notifications %}
+            <div class="notification-card centered">
+                <div class="header">
+                    <span class="icon">🔔</span>
+                    <strong>Notification</strong>
+                    <span class="close-btn">&times;</span>
+                </div>
+                <p><strong>{{ note.project }}</strong></p>
+                <p>{{ note.message }}</p>
+                <p>Tap below to Accept or Decline the request.</p>
+                <div class="actions">
+                    <button class="accept">Accept</button>
+                    <button class="reject">Reject</button>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</body>
+</html>
