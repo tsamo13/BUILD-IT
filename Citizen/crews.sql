@@ -1,7 +1,8 @@
-CREATE DATABASE IF NOT EXISTS databases_project;
-USE databases_project;
+-- Active: 1701175731673@@127.0.0.1@3306
 
-CREATE TABLE User (
+CREATE DATABASE crews;
+USE crews;
+CREATE TABLE my_user (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -11,18 +12,18 @@ CREATE TABLE User (
 );
 
 CREATE TABLE Citizen (
-    user_id INT PRIMARY KEY REFERENCES User(id)
+    user_id INT PRIMARY KEY REFERENCES my_user(id)
 );
 
 CREATE TABLE Construction (
-    user_id INT PRIMARY KEY REFERENCES User(id),
+    user_id INT PRIMARY KEY REFERENCES my_user(id),
     description TEXT,
     location VARCHAR(100),
     available BOOLEAN
 );
 
 CREATE TABLE Workshop (
-    user_id INT PRIMARY KEY REFERENCES User(id),
+    user_id INT PRIMARY KEY REFERENCES my_user(id),
     workshop_type VARCHAR(50),
     description TEXT,
     location VARCHAR(100),
@@ -37,9 +38,7 @@ CREATE TABLE Project (
     start_date DATE,
     location VARCHAR(100),
     status VARCHAR(20) CHECK (status IN ('Pending', 'Active', 'Completed')),
-    citizen_id INT REFERENCES Citizen(user_id),
-    construction_id INT REFERENCES Construction(user_id),
-    workshop_id INT REFERENCES Workshop(user_id)
+    citizen_id INT REFERENCES Citizen(user_id)
 );
 
 CREATE TABLE License (
@@ -61,8 +60,8 @@ CREATE TABLE Issue (
 
 CREATE TABLE Review (
     id SERIAL PRIMARY KEY,
-    reviewer_id INT REFERENCES User(id),
-    reviewee_id INT REFERENCES User(id),
+    reviewer_id INT REFERENCES my_user(id),
+    reviewee_id INT REFERENCES my_user(id),
     project_id INT REFERENCES Project(id),
     stars INT CHECK (stars BETWEEN 1 AND 5),
     date DATE,
@@ -94,7 +93,7 @@ CREATE TABLE ProgressUpdate (
 
 CREATE TABLE Notification (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES User(id),
+    user_id INT REFERENCES my_user(id),
     type VARCHAR(50),
     title VARCHAR(100),
     date DATE
@@ -110,85 +109,63 @@ CREATE TABLE WorkshopRequest (
 );
 
 
-USE databases_project;
 
 
--- Χρήστες (User) - 10 συνολικά: 3 Citizens, 4 Constructions, 3 Workshops
-INSERT INTO User (id, name, email, password, phone_number, address) VALUES
-(1, 'Brandon Russell', 'grayanna@christian-moore.com', 'hashed_pw1', '+1-532-061-9610', 'Pruitt Ports, Matthewfort'),
-(2, 'Rhonda Stewart', 'ocohen@hotmail.com', 'hashed_pw2', '+1-786-580-2174x255', 'Smith Radial, Port Courtneytown'),
-(3, 'Jonathan Holloway', 'victoria38@hooper-hernandez.net', 'hashed_pw3', '670.027.3045x466', 'Merritt Underpass, Jonesfurt'),
-(4, 'Amanda Hoffman', 'andrew26@gmail.com', 'hashed_pw4', '001-253-108-6842x465', 'Reynolds Streets, Pittsmouth'),
-(5, 'Frederick Black', 'vincent85@barry.com', 'hashed_pw5', '833-546-0813x830', 'Sarah Valleys, Port Rachel'),
-(6, 'Dawn Wall', 'randy38@gmail.com', 'hashed_pw6', '+1-099-759-1057x565', 'Bennett Greens, West Davidview'),
-(7, 'James Willis', 'owenskathy@hotmail.com', 'hashed_pw7', '374-799-5378x94502', 'Thomas Plains, South Williamport'),
-(8, 'James Watts', 'justin65@williams-smith.com', 'hashed_pw8', '048.283.4773', 'Abigail Cliff, Russellmouth'),
-(9, 'Matthew Holmes', 'ntaylor@compton.com', 'hashed_pw9', '600-658-0036', 'Kaitlyn Turnpike, South Jeffrey'),
-(10, 'Jeanette Lopez', 'soneill@alvarez.com', 'hashed_pw10', '(175)890-7854', 'Kimberly Ford, Taylortown');
+INSERT INTO my_user (id, name, email, password, phone_number, address) VALUES
+(1, 'Brandon Russell', 'grayanna@christian-moore.com', 'hashed_pw1', '+1-532-061-9610', '01220 Pruitt Ports Suite 470, Matthewfort, PA 84224'),
+(2, 'Rhonda Stewart', 'ocohen@hotmail.com', 'hashed_pw2', '+1-786-580-2174x255', '769 Smith Radial, Port Courtneytown, MI 30533'),
+(3, 'Jonathan Holloway', 'victoria38@hooper-hernandez.net', 'hashed_pw3', '670.027.3045x466', '511 Merritt Underpass, Jonesfurt, MD 34912'),
+(4, 'Amanda Hoffman', 'andrew26@gmail.com', 'hashed_pw4', '001-253-108-6842x465', '129 Reynolds Streets Apt. 705, Pittsmouth, NE 04204'),
+(5, 'Frederick Black', 'vincent85@barry.com', 'hashed_pw5', '833-546-0813x830', '95158 Sarah Valleys, Port Rachel, VA 52714'),
+(6, 'Dawn Wall', 'randy38@gmail.com', 'hashed_pw6', '+1-099-759-1057x565', '3260 Bennett Greens Apt. 865, West Davidview, PA 42736'),
+(7, 'James Willis', 'owenskathy@hotmail.com', 'hashed_pw7', '374-799-5378x94502', '727 Thomas Plains Apt. 553, South Williamport, OR 02327'),
+(8, 'James Watts', 'justin65@williams-smith.com', 'hashed_pw8', '048.283.4773', '79884 Abigail Cliff, Russellmouth, AR 75213'),
+(9, 'Matthew Holmes', 'ntaylor@compton.com', 'hashed_pw9', '600-658-0036', '1453 Kaitlyn Turnpike, South Jeffrey, NY 87325'),
+(10, 'Jeanette Lopez', 'soneill@alvarez.com', 'hashed_pw10', '(175)890-7854', '18195 Kimberly Ford Suite 262, Taylortown, WY 11813');
 
--- Πολίτες (Citizen)
 INSERT INTO Citizen (user_id) VALUES
 (1),
 (2),
 (3);
 
--- Κατασκευαστικές (Construction)
 INSERT INTO Construction (user_id, description, location, available) VALUES
 (4, 'Boy receive care American.', 'Lake Albertmouth', TRUE),
 (5, 'Particular know bit others.', 'South Anthony', TRUE),
 (6, 'Share too public.', 'West Brianview', FALSE),
 (7, 'Indeed drive above.', 'Calvintown', TRUE);
 
--- Συνεργεία (Workshop)
 INSERT INTO Workshop (user_id, workshop_type, description, location, available) VALUES
 (8, 'Electricians', 'Social hour nothing point.', 'Justinborough', TRUE),
 (9, 'Plumbers', 'Near today artist.', 'North Scott', TRUE),
 (10, 'Painters', 'Study something third.', 'Port Janice', FALSE);
 
--- Έργα (Project) με σύνδεση σε Citizen + Construction + Workshop
-INSERT INTO Project (name, information, construction_type, start_date, location, status, citizen_id, construction_id, workshop_id) VALUES
-('Dream House', 'Yard understand three page.', 'Construction', '2025-06-01', 'Lake Lauren', 'Pending', 1, 4, 8),
-('Office Reno', 'Look he space let possible exist Mrs.', 'Renovation', '2025-05-20', 'Karenburgh', 'Active', 2, 5, 9);
+INSERT INTO Project (name, information, construction_type, start_date, location, status, citizen_id) VALUES
+('Dream House', 'Yard understand three page.', 'Construction', '2025-06-01', 'Lake Lauren', 'Pending', 1),
+('Office Reno', 'Look he space let possible exist Mrs.', 'Renovation', '2025-05-20', 'Karenburgh', 'Active', 2);
 
--- Άδειες (License)
 INSERT INTO License (project_id, license_type, license_description, start_date) VALUES
 (1, 'Building', 'General permit for foundation', '2025-05-01'),
 (2, 'Renovation', 'Office internal redesign', '2025-05-10');
 
--- Προβλήματα (Issue)
 INSERT INTO Issue (project_id, construction_id, issue_type, issue_description, new_finish_date) VALUES
 (1, 4, 'Καθυστέρηση', 'Supply chain delay', '2025-06-30'),
 (2, 5, 'Υλικά', 'Wrong material delivered', '2025-06-25');
 
--- Αξιολογήσεις (Review)
 INSERT INTO Review (reviewer_id, reviewee_id, project_id, stars, comments, date) VALUES
 (1, 4, 1, 5, 'Excellent collaboration', '2025-05-15'),
 (2, 5, 1, 4, 'Very responsive', '2025-05-16'),
 (4, 8, 1, 5, 'Great quality work', '2025-05-17');
 
--- Ειδοποιήσεις
-INSERT INTO Notification (user_id, title, type, date) VALUES
-(1, 'Project Approved', 'Approval', '2025-05-15'),
-(4, 'New Issue Reported', 'Alert', '2025-05-16'),
-(8, 'Review received', 'Info', '2025-05-17');
+SELECT * FROM Workshop;
+SELECT COUNT(*) FROM Workshop;
 
--- Αιτήματα προς Συνεργεία
-INSERT INTO WorkshopRequest (construction_id, workshop_id, project_id, status, message) VALUES
-(4, 8, 1, 'Pending', 'Can you join the Dream House project?'),
-(5, 9, 2, 'Accepted', 'Thanks for joining Office Reno.');
+-- Πρέπει να υπάρχουν τουλάχιστον:
+-- Ένας χρήστης (στον my_user)
+-- Ένα συνεργείο με αυτόν ως user_id στο Workshop
 
--- Αιτήματα κατασκευαστικών (Request)
-INSERT INTO Request (construction_id, project_title, email, text) VALUES
-(4, 'Dream House', 'constr4@company.com', 'We would like to participate.'),
-(5, 'Office Reno', 'constr5@company.com', 'Are there subcontracting opportunities?');
+INSERT INTO my_user (name, email, password) VALUES ('Ηλεκτρολόγος 1', 'hlek1@example.com', '1234');
 
--- Αναθέσεις (Appointment)
-INSERT INTO Appointment (construction_id, citizen_id, estimated_cost) VALUES
-(4, 1, 95000.0),
-(5, 2, 112000.0);
+INSERT INTO Workshop (user_id, workshop_type, description, location, available)
+VALUES (1, 'Ηλεκτρολόγοι', 'Εξειδικευμένος ηλεκτρολόγος', 'Πάτρα', true);
 
--- Ενημερώσεις Προόδου
-INSERT INTO ProgressUpdate (workshop_id, project_id, message, created_at) VALUES
-(8, 1, 'Initial setup completed', '2025-05-20'),
-(9, 2, 'Work in progress – plumbing started', '2025-05-25');
-
+SELECT * FROM Workshop;
