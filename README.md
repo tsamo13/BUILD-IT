@@ -21,7 +21,7 @@
 - View assigned projects and update status
 - Send messages to construction companies for updates
 
-## 📁 Project Files
+## 📁 Project Deliverables
 
 - `Files_of_1st_deliverable`: Folder that includes
   - Project-description-v0.1
@@ -41,25 +41,26 @@
   - Project-code-v1.0
 
 - `1st Integrated Deliverable.pdf`: Full documentation of the first deliverable including system overview, use case and domain model.
-- `2nd Integrated Deliverable.pdf`: Full documentation of the second deliverable including robustness diagrams and update use-case/domain model.
+- `2nd Integrated Deliverable.pdf`: Full documentation of the second deliverable including robustness diagrams and updated use-case/domain model.
 - `Final Integrated Deliverable.pdf`: Full documentation of the final deliverable including all diagrams, mockups and test cases
 
 ---
 
-## Code Folders
-
-- **Citizen** :   Contains code related to the actions and responsibilities of the individual user (citizen)
-- **Construction** :  Contains code for construction companies
-- **Workshop** : Contains code for workshop users
+## Code Folder
+All source code is located in the `code_files` folder, which contains:  
+- **Citizen** :   Includes code related to the actions and responsibilities of the individual user (citizen) such as evaluating construction companies and publish new projects.
+- **Construction** :  Includes code for construction companies to manage projects.
+- **Workshop** : Includes code for workshop users to progress updates and project notifications.
+- **welcome**:  Main Flask web app folder that handles web server and routing logic,contains some images and templates.
 - **test_app.py**: A standalone script that includes test cases verifying the core functionality of the platform.
 
 
 ## 🛠️ Tools Used
 
 - **Figma**: UI Mockups and prototype screens
-- **Visual Paradigm**: Use case, robustness, sequence, and class diagrams
-- **Python**: Initial functional prototype
-- **GitHub**: Code repository and version control
+- **Visual Paradigm**: Use case, robustness and sequence diagrams
+- **Python**: Functional backend prototype
+- **GitHub**: Version control and team collaboration
 
 ---
 
