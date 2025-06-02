@@ -46,7 +46,7 @@
 
 ---
 
-## Code Folder
+##  📂 Code Folder
 All source code is located in the `code` folder, which contains:  
 - **Citizen** :   Includes code related to the actions and responsibilities of the individual user (citizen) such as evaluating construction companies and publish new projects.
 - **Construction** :  Includes code for construction companies to manage projects.
